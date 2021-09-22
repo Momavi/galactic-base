@@ -1,10 +1,32 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Cписок кораблей</router-link> |
+    <router-link to="/about">Текущий корабль</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
+
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+  name: "app",
+  components: {},
+  data: () => {
+    return {};
+  },
+  computed: {
+    ...mapGetters(["STARSHIPS"]),
+  },
+  methods: {
+    ...mapActions(["GET_STARSHIPS"]),
+  },
+  mounted() {
+    this.GET_STARSHIPS();
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
