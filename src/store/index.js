@@ -5,7 +5,7 @@ import {
 
 export default createStore({
   state: {
-    starships: [],
+    starships: null,
   },
   mutations: {
     SET_STARSHIPS: (state, starships) => {

@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <HelloWorld count="{count}" />
+    <Ships />
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import Ships from "@/components/Ships.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    Ships,
+  },
+};
 </script>
