@@ -3,26 +3,40 @@
     <div class="starship">
       <div class="starship__data">
         <h3>{{ starship.name }}</h3>
-        <p>Цена в кредитах: {{ starship.cost_in_credits }}</p>
+        <p>
+          Цена:
+          {{ starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') }} кредитов
+        </p>
         <p>Класс: {{ starship.starship_class }}</p>
       </div>
       <div>
-        <button class="starship__btn">Подробнее</button>
         <p class="starship__manufacturer">
           Производитель: {{ starship.manufacturer }}
         </p>
+        <router-link class="starship__btn-link" to="/about">
+          <button
+            class="starship__btn"
+            @click="this.GET_CURRENT_STARSHIP(starship)"
+          >
+            Подробнее
+          </button>
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Starship",
   computed: {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
     },
+  },
+  methods: {
+    ...mapActions(["GET_CURRENT_STARSHIP"]),
   },
 };
 </script>
@@ -31,14 +45,15 @@ export default {
 .starship {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   max-width: 250px;
-  min-height: 300px;
+  min-height: 350px;
   margin: 40px 25px 15px;
   padding: 15px;
   font-size: 18px;
   border: 2px solid #42b98371;
   border-radius: 30px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.726);
   &__data {
     margin-bottom: 10px;
   }
@@ -47,12 +62,17 @@ export default {
     border: 2px solid #0ece78b6;
     border-radius: 15px;
     margin: 0;
-    padding: 6px 15px;
+    padding: 9px 16px;
     color: rgb(216, 216, 216);
+    cursor: pointer;
     transition: all 0.3s;
+    &-link {
+      text-decoration: none;
+      color: #cfd2d4;
+    }
     &:hover {
-      background-color: #00ff8ccb;
-      border: 2px solid #00ff6aee;
+      background-color: #00ff8cb7;
+      border: 2px solid #00ff6ada;
       color: rgba(5, 5, 5, 0.87);
     }
   }
