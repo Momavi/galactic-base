@@ -1,16 +1,40 @@
 <template>
-  <div class="home">
-    <Ships />
+  <div v-if="STARSHIPS !== null">
+    <div class="hello">
+      <Paginator />
+    </div>
+    <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
+    <div class="wrapper">
+      <Starship />
+    </div>
   </div>
 </template>
 
-<script>
-import Ships from "@/components/Ships.vue";
+<script lang="js">
+import Paginator from "@/components/Paginator.vue";
+import Starship from "@/components/Starship.vue";
 
 export default {
-  name: "Home",
-  components: {
-    Ships,
+  name: 'Ships',
+  computed: {
+    STARSHIPS() {
+      return this.$store.getters.STARSHIPS;
+    }
   },
-};
+  components: {
+    Paginator,
+    Starship,
+  },
+}
 </script>
+
+<style scoped lang="scss">
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+}
+</style>
