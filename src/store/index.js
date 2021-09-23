@@ -6,6 +6,8 @@ import {
 export default createStore({
   state: {
     starships: null,
+    currentPage: 1,
+    isFetch: true,
   },
   mutations: {
     SET_STARSHIPS: (state, starships) => {
@@ -18,20 +20,49 @@ export default createStore({
     },
   },
   actions: {
-    GET_STARSHIPS({
+    async GET_STARSHIPS({
       commit
     }) {
-      return axios("https://swapi.dev/api/starships/?format=json", {
+      try {
+        const response = await axios("https://swapi.dev/api/starships/?format=json", {
           method: "GET",
-        })
-        .then((response) => {
-          commit("SET_STARSHIPS", response.data);
-          return response;
-        })
-        .catch((error) => {
-          console.log(error);
-          return error;
         });
+        commit("SET_STARSHIPS", response.data);
+        return response;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    },
+    async GET_STARSHIPS_NEXT({
+      getters,
+      commit
+    }) {
+      try {
+        const response = await axios(getters.STARSHIPS.next, {
+          method: "GET",
+        });
+        commit("SET_STARSHIPS", response.data);
+        return response;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
+    },
+    async GET_STARSHIPS_PREV({
+      getters,
+      commit
+    }) {
+      try {
+        const response = await axios(getters.STARSHIPS.previous, {
+          method: "GET",
+        });
+        commit("SET_STARSHIPS", response.data);
+        return response;
+      } catch (error) {
+        console.log(error);
+        return error;
+      }
     },
   },
   modules: {},
