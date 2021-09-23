@@ -6,7 +6,6 @@
   <router-view />
 </template>
 
-
 <script>
 import { mapActions, mapGetters } from "vuex";
 
@@ -30,6 +29,7 @@ export default {
 
 <style lang="scss">
 body {
+  background-color: #131516;
   margin: 0;
 }
 #app {
