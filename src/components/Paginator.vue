@@ -56,10 +56,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.active {
-  color: #00ff8ccb;
-  text-decoration: underline;
-}
 .paginator {
   display: flex;
   align-items: center;
@@ -73,8 +69,13 @@ export default {
       list-style-type: none;
       padding: 5px;
       border: 2px solid transparent;
-      border-radius: 25px;
+      border-radius: 15px;
       cursor: pointer;
+      transition: all 0.2s;
+      &.active {
+        color: #00ff8ccb;
+        border-bottom: 2px solid #00ff8ccb;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -93,7 +94,6 @@ export default {
     padding: 6px 15px;
     text-decoration: none;
     user-select: none;
-    cursor: pointer;
     transition: all 0.3s;
     &-prev {
       margin-right: 30px;
@@ -105,6 +105,7 @@ export default {
       background-color: #42b98367;
       border: 2px solid #0ece78b6;
       color: rgb(216, 216, 216);
+      cursor: pointer;
       &:hover {
         background-color: #00ff8ccb;
         border: 2px solid #00ff6aee;
