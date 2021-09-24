@@ -2,6 +2,9 @@ export default {
   SET_STARSHIPS: (state, starships) => {
     state.starships = starships;
   },
+  SET_STARSHIPS_RESULTS: (state, starships) => {
+    state.starships.results = starships;
+  },
   SET_CURRENTPAGE: (state, page) => {
     state.currentPage = page;
   },
