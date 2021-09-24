@@ -8,7 +8,7 @@ export default {
   CURRENTPAGE(state) {
     return state.currentPage;
   },
-  FETCH(state) {
+  ISFETCH(state) {
     return state.isFetch;
   },
   PAGESIZE(state) {

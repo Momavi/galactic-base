@@ -18,6 +18,7 @@ export default createStore({
     currentPage: 1,
     currentStarship: null,
     pageSize: 4,
+    isFetch: false,
   },
   mutations,
   getters,

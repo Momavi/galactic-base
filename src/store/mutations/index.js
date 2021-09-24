@@ -8,6 +8,9 @@ export default {
   SET_CURRENT_STARSHIP: (state, starship) => {
     state.currentStarship = starship
   },
+  SET_ISFETCH: (state, truth) => {
+    state.isFetch = truth;
+  },
   INCREMENT_CURRENTPAGE: (state) => {
     state.currentPage = state.currentPage + 1;
   },
