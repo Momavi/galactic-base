@@ -1,12 +1,13 @@
 <template>
   <div v-if="STARSHIPS !== null">
-    <div class="hello">
-      <Paginator />
-    </div>
+    <Paginator />
     <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
     <div class="wrapper">
       <Starship />
     </div>
+  </div>
+  <div v-else>
+    <img src="@/assets/preloader.svg" alt="" />
   </div>
 </template>
 
@@ -15,7 +16,7 @@ import Paginator from "@/components/Paginator.vue";
 import Starship from "@/components/Starship.vue";
 
 export default {
-  name: 'Ships',
+  name: 'Home',
   computed: {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
