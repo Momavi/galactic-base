@@ -1,31 +1,31 @@
 <template>
   <div v-for="starship in STARSHIPS.results" :key="starship.name">
-    <div class="starship">
-      <div class="starship__data">
-        <h3>{{ starship.name }}</h3>
-        <p>
-          Цена:
-          {{
-            starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
-          }}
-          кредитов
-        </p>
-        <p>Класс: {{ starship.starship_class }}</p>
-      </div>
-      <div>
-        <p class="starship__manufacturer">
-          Производитель: {{ starship.manufacturer }}
-        </p>
-        <router-link class="starship__btn-link" to="/about">
+    <router-link class="starship__btn-link" to="/about">
+      <div class="starship">
+        <div class="starship__data" @click="this.CURRENT_STARSHIP(starship)">
+          <h3>{{ starship.name }}</h3>
+          <p>
+            Цена:
+            {{
+              starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
+            }}
+            кредитов
+          </p>
+          <p>Класс: {{ starship.starship_class }}</p>
+        </div>
+        <div>
+          <p class="starship__manufacturer">
+            Производитель: {{ starship.manufacturer }}
+          </p>
           <button
             class="starship__btn"
             @click="this.CURRENT_STARSHIP(starship)"
           >
             Подробнее
           </button>
-        </router-link>
+        </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
