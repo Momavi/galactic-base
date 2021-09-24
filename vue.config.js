@@ -1,3 +1,4 @@
 module.exports = {
-  publicPath: '/galactic-base/'
+  publicPath: process.env.NODE_ENV === 'production' ?
+    '/galactic-base/' : '/'
 }
