@@ -69,7 +69,7 @@ export default {
       list-style-type: none;
       padding: 5px;
       border: 2px solid transparent;
-      border-radius: 15px;
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.2s;
       &.active {
