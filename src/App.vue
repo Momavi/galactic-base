@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <router-link class="nav__link" to="/">Cписок кораблей</router-link>
-    <span v-if="CURRENTSTARSHIP">
+    <span v-if="CURRENT_STARSHIP">
       |
       <router-link to="/about">Текущий корабль</router-link>
     </span>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters(["STARSHIPS"]),
-    ...mapGetters(["CURRENTSTARSHIP"]),
+    ...mapGetters(["CURRENT_STARSHIP"]),
   },
   methods: {
     ...mapActions(["GET_STARSHIPS"]),
@@ -36,6 +36,16 @@ body {
   background-color: #131516;
   margin: 0;
 }
+::-webkit-scrollbar {
+  width: 14px;
+  background-color: #1f1d1d;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #27634a;
+}
+::-webkit-scrollbar-track {
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,6 +57,8 @@ body {
 
 #nav {
   padding: 30px;
+  margin-bottom: 30px;
+
   a {
     font-weight: bold;
     color: #2c3e50;
