@@ -1,5 +1,6 @@
 <template>
   <div v-if="STARSHIPS !== null">
+    <Input />
     <Paginator />
     <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
     <div class="wrapper">
@@ -14,6 +15,7 @@
 <script lang="js">
 import Paginator from "@/components/Paginator.vue";
 import Starship from "@/components/Starship.vue";
+import Input from "@/components/Input.vue";
 
 export default {
   name: 'Home',
@@ -23,6 +25,7 @@ export default {
     }
   },
   components: {
+    Input,
     Paginator,
     Starship,
   },
