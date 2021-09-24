@@ -1,70 +1,83 @@
 <template>
   <div class="about">
-    <div v-if="CURRENTSTARSHIP">
-      <h1>{{ CURRENTSTARSHIP.name }}</h1>
+    <div v-if="CURRENT_STARSHIP">
+      <h1>{{ CURRENT_STARSHIP.name }}</h1>
       <div class="about__wrapper">
         <p>
-          Модель: <strong>{{ CURRENTSTARSHIP.model }}</strong>
+          Модель: <strong>{{ CURRENT_STARSHIP.model }}</strong>
         </p>
         <p>
-          Класс корабля: <strong>{{ CURRENTSTARSHIP.starship_class }}</strong>
+          Класс корабля: <strong>{{ CURRENT_STARSHIP.starship_class }}</strong>
         </p>
         <p>
-          Производитель: <strong>{{ CURRENTSTARSHIP.manufacturer }}</strong>
+          Производитель: <strong>{{ CURRENT_STARSHIP.manufacturer }}</strong>
         </p>
         <p>
-          Цена: <strong>{{ CURRENTSTARSHIP.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') }}</strong> кредитов
+          Цена:
+          <strong>{{
+            CURRENT_STARSHIP.cost_in_credits.replace(
+              /(\d)(?=(\d{3})+(\D|$))/g,
+              "$1 "
+            )
+          }}</strong>
+          кредитов
         </p>
         <p>
-          Длина: <strong>{{ CURRENTSTARSHIP.length }}</strong> км
+          Длина: <strong>{{ CURRENT_STARSHIP.length }}</strong> км
         </p>
         <p>
           Максимальная атмосферная скорость:
-          <strong>{{ CURRENTSTARSHIP.max_atmosphering_speed }}</strong>
+          <strong>{{ CURRENT_STARSHIP.max_atmosphering_speed }}</strong>
           КМ/Ч
         </p>
         <p>
-          Экипаж: <strong>{{ CURRENTSTARSHIP.crew }}</strong> человек
+          Экипаж: <strong>{{ CURRENT_STARSHIP.crew }}</strong> человек
         </p>
         <p>
-          Пассажиры: <strong>{{ CURRENTSTARSHIP.passengers }}</strong> человек
+          Пассажиры: <strong>{{ CURRENT_STARSHIP.passengers }}</strong> человек
         </p>
         <p>
           Грузоподъемность:
-          <strong>{{ CURRENTSTARSHIP.cargo_capacity.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') }}</strong> кг
+          <strong>{{
+            CURRENT_STARSHIP.cargo_capacity.replace(
+              /(\d)(?=(\d{3})+(\D|$))/g,
+              "$1 "
+            )
+          }}</strong>
+          кг
         </p>
         <p>
-          Гарантия: <strong>{{ CURRENTSTARSHIP.consumables }}</strong>
+          Гарантия: <strong>{{ CURRENT_STARSHIP.consumables }}</strong>
         </p>
         <p>
           Скорость гипердвигателя:
-          <strong>{{ CURRENTSTARSHIP.hyperdrive_rating }}</strong>
+          <strong>{{ CURRENT_STARSHIP.hyperdrive_rating }}</strong>
         </p>
         <p>
           MGLT:
-          <strong>{{ CURRENTSTARSHIP.MGLT }}</strong>
+          <strong>{{ CURRENT_STARSHIP.MGLT }}</strong>
         </p>
-        <span v-if="CURRENTSTARSHIP.pilots">
+        <span v-if="CURRENT_STARSHIP.pilots">
           Пилоты:
-          <p v-for="pilot in CURRENTSTARSHIP.pilots" :key="pilot">
+          <p v-for="pilot in CURRENT_STARSHIP.pilots" :key="pilot">
             {{ pilot }},
           </p>
         </span>
-        <span v-if="CURRENTSTARSHIP.films">
+        <span v-if="CURRENT_STARSHIP.films">
           Фильмы:
-          <p v-for="film in CURRENTSTARSHIP.films" :key="film">{{ film }},</p>
+          <p v-for="film in CURRENT_STARSHIP.films" :key="film">{{ film }},</p>
         </span>
         <p>
           Дата создания:
-          <strong>{{ CURRENTSTARSHIP.created }}</strong>
+          <strong>{{ CURRENT_STARSHIP.created }}</strong>
         </p>
         <p>
           Дата изменения:
-          <strong>{{ CURRENTSTARSHIP.edited }}</strong>
+          <strong>{{ CURRENT_STARSHIP.edited }}</strong>
         </p>
         <p>
           Ссылка на источник:
-          <a href="CURRENTSTARSHIP.url">{{ CURRENTSTARSHIP.url }}</a>
+          <a href="CURRENT_STARSHIP.url">{{ CURRENT_STARSHIP.url }}</a>
         </p>
       </div>
     </div>
@@ -76,8 +89,8 @@
 export default {
   name: "About",
   computed: {
-    CURRENTSTARSHIP() {
-      return this.$store.getters.CURRENTSTARSHIP;
+    CURRENT_STARSHIP() {
+      return this.$store.getters.CURRENT_STARSHIP;
     },
   },
 };

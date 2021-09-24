@@ -5,7 +5,10 @@
         <h3>{{ starship.name }}</h3>
         <p>
           Цена:
-          {{ starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ') }} кредитов
+          {{
+            starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
+          }}
+          кредитов
         </p>
         <p>Класс: {{ starship.starship_class }}</p>
       </div>
@@ -16,7 +19,7 @@
         <router-link class="starship__btn-link" to="/about">
           <button
             class="starship__btn"
-            @click="this.GET_CURRENT_STARSHIP(starship)"
+            @click="this.CURRENT_STARSHIP(starship)"
           >
             Подробнее
           </button>
@@ -36,7 +39,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["GET_CURRENT_STARSHIP"]),
+    ...mapActions(["CURRENT_STARSHIP"]),
   },
 };
 </script>
