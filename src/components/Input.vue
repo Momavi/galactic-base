@@ -5,6 +5,12 @@
       v-model="searchText"
       type="text"
       placeholder="Название корабля"
+      v-on:keyup.enter="
+        this.SET_STARSHIP_FOR_NAME({
+          STARSHIPS: STARSHIPS,
+          name: searchText,
+        })
+      "
     />
     <div class="input__button">
       <button
