@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <router-link class="nav__link" to="/">Cписок кораблей</router-link>
-    <span v-if="CURRENT_STARSHIP">
+    <span v-if="CURRENTSTARSHIP">
       |
       <router-link to="/about">Текущий корабль</router-link>
     </span>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters(["STARSHIPS"]),
-    ...mapGetters(["CURRENT_STARSHIP"]),
+    ...mapGetters(["CURRENTSTARSHIP"]),
   },
   methods: {
     ...mapActions(["GET_STARSHIPS"]),
@@ -47,8 +47,6 @@ body {
 
 #nav {
   padding: 30px;
-  margin-bottom: 30px;
-
   a {
     font-weight: bold;
     color: #2c3e50;
