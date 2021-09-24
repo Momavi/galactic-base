@@ -3,8 +3,11 @@
     <Input />
     <Paginator />
     <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
-    <div class="wrapper">
+    <div class="wrapper" v-if="ISFETCH">
       <Starship />
+    </div>
+    <div v-else>
+      <img src="@/assets/preloader.svg" alt="" />
     </div>
   </div>
   <div v-else>
@@ -22,6 +25,9 @@ export default {
   computed: {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
+    },
+    ISFETCH() {
+      return this.$store.getters.ISFETCH;
     }
   },
   components: {
