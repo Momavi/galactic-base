@@ -57,11 +57,14 @@
           MGLT:
           <strong>{{ CURRENT_STARSHIP.MGLT }}</strong>
         </p>
-        <span v-if="CURRENT_STARSHIP.pilots">
+        <span v-if="CURRENT_STARSHIP.pilots.length > 0">
           Пилоты:
           <p v-for="pilot in CURRENT_STARSHIP.pilots" :key="pilot">
             {{ pilot }},
           </p>
+        </span>
+        <span v-else>
+          Пилоты: неизвестны
         </span>
         <span v-if="CURRENT_STARSHIP.films">
           Фильмы:
@@ -77,7 +80,7 @@
         </p>
         <p>
           Ссылка на источник:
-          <a href="CURRENT_STARSHIP.url">{{ CURRENT_STARSHIP.url }}</a>
+          <a v-bind:href="CURRENT_STARSHIP.url">{{ CURRENT_STARSHIP.url }}</a>
         </p>
       </div>
     </div>
