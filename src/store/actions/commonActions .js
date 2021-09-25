@@ -1,8 +1,11 @@
+import router from "../../router";
+
 export default {
   CURRENT_STARSHIP({
     commit
   }, data) {
     commit("SET_CURRENT_STARSHIP", data)
+    router.push('about')
   },
   SET_STARSHIP_FOR_NAME({
     commit

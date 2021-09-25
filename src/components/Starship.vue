@@ -1,31 +1,26 @@
 <template>
   <div v-for="starship in STARSHIPS.results" :key="starship.name">
-    <router-link class="starship__btn-link" to="/about">
-      <div class="starship">
-        <div class="starship__data" @click="this.CURRENT_STARSHIP(starship)">
-          <h3>{{ starship.name }}</h3>
-          <p>
-            Цена:
-            {{
-              starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
-            }}
-            кредитов
-          </p>
-          <p>Класс: {{ starship.starship_class }}</p>
-        </div>
-        <div>
-          <p class="starship__manufacturer">
-            Производитель: {{ starship.manufacturer }}
-          </p>
-          <button
-            class="starship__btn"
-            @click="this.CURRENT_STARSHIP(starship)"
-          >
-            Подробнее
-          </button>
-        </div>
+    <div class="starship" @click="this.CURRENT_STARSHIP(starship)">
+      <div class="starship__data">
+        <h3>{{ starship.name }}</h3>
+        <p>
+          Цена:
+          {{
+            starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
+          }}
+          кредитов
+        </p>
+        <p>Класс: {{ starship.starship_class }}</p>
       </div>
-    </router-link>
+      <div>
+        <p class="starship__manufacturer">
+          Производитель: {{ starship.manufacturer }}
+        </p>
+        <button class="starship__btn" @click="this.CURRENT_STARSHIP(starship)">
+          Подробнее
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,6 +52,7 @@ export default {
   border: 2px solid #42b98371;
   border-radius: 30px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.726);
+  cursor: pointer;
   &__data {
     margin-bottom: 10px;
   }
