@@ -3,12 +3,13 @@
     <Input />
     <Paginator />
     <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
-    <div class="wrapper" v-if="ISFETCH">
+    <div v-if="ISFETCH">
       <Starship />
     </div>
     <div v-else>
       <img src="@/assets/preloader.svg" alt="" />
     </div>
+    <Popup />
   </div>
   <div v-else>
     <img src="@/assets/preloader.svg" alt="" />
@@ -19,6 +20,7 @@
 import Paginator from "@/components/Paginator.vue";
 import Starship from "@/components/Starship.vue";
 import Input from "@/components/Input.vue";
+import Popup from "@/components/Popup.vue";
 
 export default {
   name: 'Home',
@@ -34,17 +36,9 @@ export default {
     Input,
     Paginator,
     Starship,
+    Popup
   },
 }
 </script>
 
-<style scoped lang="scss">
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: row;
-}
-</style>
+<style scoped lang="scss"></style>

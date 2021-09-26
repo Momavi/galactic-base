@@ -21,5 +21,8 @@ export default {
   },
   DECREMENT_CURRENTPAGE: (state) => {
     state.currentPage = state.currentPage - 1;
+  },
+  CHANGE_POPUP_SHOW: (state, truth) => {
+    state.isPopupOpen = truth
   }
 }
