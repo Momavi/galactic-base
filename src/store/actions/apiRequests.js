@@ -22,16 +22,15 @@ export default {
     commit
   }, data) {
     commit("SET_ISFETCH", false)
+    data.atribute === "next" ?
+      commit("INCREMENT_CURRENTPAGE") :
+      commit("DECREMENT_CURRENTPAGE")
     try {
       const response = await axios(data.link, {
         method: "GET",
       });
-      0
-      data.atribute === "next" ?
-        commit("INCREMENT_CURRENTPAGE") :
-        commit("DECREMENT_CURRENTPAGE")
-
       commit("SET_STARSHIPS", response.data);
+      commit("CLEAR_STARSHIPS_SEARCH")
       commit("SET_ISFETCH", true)
       return response;
     } catch (error) {
@@ -50,6 +49,7 @@ export default {
       });
       commit("SET_STARSHIPS", response.data);
       commit("SET_CURRENTPAGE", currentPage);
+      commit("CLEAR_STARSHIPS_SEARCH")
       commit("SET_ISFETCH", true)
       return response;
     } catch (error) {

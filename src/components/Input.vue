@@ -1,30 +1,42 @@
 <template>
   <div class="input__wrapper">
-    <input
-      class="input-box"
-      v-model="searchText"
-      type="text"
-      placeholder="Название корабля"
-      v-on:keyup.enter="
-        this.SET_STARSHIP_FOR_NAME({
-          STARSHIPS: STARSHIPS,
-          name: searchText,
-        })
-      "
-    />
-    <div class="input__button">
-      <button
-        class="input__button-btn"
-        @click="
+      <input
+        class="input-box"
+        v-model="searchText"
+        type="text"
+        placeholder="Название корабля"
+        v-on:keyup.enter="
           this.SET_STARSHIP_FOR_NAME({
             STARSHIPS: STARSHIPS,
             name: searchText,
           })
         "
-      >
-        Поиск
-      </button>
-    </div>
+      />
+      <div class="input__button">
+        <button
+          class="input__button-btn"
+          @click="
+            this.SET_STARSHIP_FOR_NAME({
+              STARSHIPS: STARSHIPS,
+              name: searchText,
+            })
+          "
+        >
+          Поиск
+        </button>
+        <button
+          class="input__reset input__button-btn"
+          v-bind:class="{ active: STARSHIPS_SEARCH }"
+          @click="
+            this.CLEAR_STARSHIPS_SEARCH({
+              STARSHIPS: STARSHIPS,
+              name: searchText,
+            })
+          "
+        >
+          Очистить поиск
+        </button>
+      </div>
   </div>
 </template>
 
@@ -42,9 +54,13 @@ export default {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
     },
+    STARSHIPS_SEARCH() {
+      return this.$store.getters.STARSHIPS_SEARCH;
+    },
   },
   methods: {
     ...mapActions(["SET_STARSHIP_FOR_NAME"]),
+    ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
   },
 };
 </script>
@@ -67,6 +83,10 @@ export default {
     outline: none;
   }
   &__button {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     &-btn {
       background-color: #6c721367;
       border: 2px solid #747c07b7;
@@ -81,6 +101,13 @@ export default {
         background-color: #a5af1193;
         border: 2px solid #c7d40ab7;
       }
+    }
+  }
+  &__reset {
+    display: none;
+    margin-left: 30px;
+    &.active {
+      display: block;
     }
   }
 }

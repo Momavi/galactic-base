@@ -19,4 +19,9 @@ export default {
     }
     commit("SET_STARSHIPS_RESULTS", ship)
   },
+  CLEAR_STARSHIPS_SEARCH({
+    commit
+  }) {
+    commit("CLEAR_STARSHIPS_SEARCH")
+  },
 }
