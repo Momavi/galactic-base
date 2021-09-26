@@ -1,42 +1,42 @@
 <template>
   <div class="input__wrapper">
-      <input
-        class="input-box"
-        v-model="searchText"
-        type="text"
-        placeholder="Название корабля"
-        v-on:keyup.enter="
+    <input
+      class="input-box"
+      v-model="searchText"
+      type="text"
+      placeholder="Название корабля"
+      v-on:keyup.enter="
+        this.SET_STARSHIP_FOR_NAME({
+          STARSHIPS: STARSHIPS,
+          name: searchText,
+        })
+      "
+    />
+    <div class="input__button">
+      <button
+        class="input__button-btn"
+        @click="
           this.SET_STARSHIP_FOR_NAME({
             STARSHIPS: STARSHIPS,
             name: searchText,
           })
         "
-      />
-      <div class="input__button">
-        <button
-          class="input__button-btn"
-          @click="
-            this.SET_STARSHIP_FOR_NAME({
-              STARSHIPS: STARSHIPS,
-              name: searchText,
-            })
-          "
-        >
-          Поиск
-        </button>
-        <button
-          class="input__reset input__button-btn"
-          v-bind:class="{ active: STARSHIPS_SEARCH }"
-          @click="
-            this.CLEAR_STARSHIPS_SEARCH({
-              STARSHIPS: STARSHIPS,
-              name: searchText,
-            })
-          "
-        >
-          Очистить поиск
-        </button>
-      </div>
+      >
+        Поиск
+      </button>
+      <button
+        class="input__reset input__button-btn"
+        v-bind:class="{ active: STARSHIPS_SEARCH }"
+        @click="
+          this.CLEAR_STARSHIPS_SEARCH({
+            STARSHIPS: STARSHIPS,
+            name: searchText,
+          })
+        "
+      >
+        Очистить поиск
+      </button>
+    </div>
   </div>
 </template>
 
