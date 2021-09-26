@@ -24,4 +24,9 @@ export default {
   }) {
     commit("CLEAR_STARSHIPS_SEARCH")
   },
+  SET_CHANGE_POPUP_SHOW({
+    commit
+  }, truth) {
+    commit("CHANGE_POPUP_SHOW", truth)
+  },
 }
