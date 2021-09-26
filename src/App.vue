@@ -1,6 +1,8 @@
 <template>
   <div id="nav">
-    <router-link class="nav__link" to="/">Cписок кораблей</router-link>
+    <router-link @click="CLEAR_STARSHIPS_SEARCH()" class="nav__link" to="/"
+      >Cписок кораблей</router-link
+    >
     <span v-if="CURRENT_STARSHIP">
       |
       <router-link to="/about">Текущий корабль</router-link>
@@ -24,6 +26,7 @@ export default {
   },
   methods: {
     ...mapActions(["GET_STARSHIPS"]),
+    ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
   },
   mounted() {
     this.GET_STARSHIPS();
