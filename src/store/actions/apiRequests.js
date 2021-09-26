@@ -19,6 +19,33 @@ export default {
       return error;
     }
   },
+  async SET_STARSHIP_FOR_NAME({
+    commit
+  }, data) {
+    const ship = []
+    let response = {}
+    const term = data.name.toLowerCase();
+    try {
+      for (let i = 1; i < 5; i++) {
+        const response = await axios("https://swapi.dev/api/starships/?page=" + i + "&format=json", {
+          method: "GET",
+        });
+        if (response.status === 200) {
+          for (var key in response.data.results) {
+            response.data.results[key].name.toLowerCase().startsWith(term) ?
+              ship.push(response.data.results[key]) :
+              null
+          }
+        }
+      }
+      commit("SET_STARSHIPS_RESULTS", ship)
+      return response;
+    } catch (error) {
+      console.log(error);
+      commit("SET_ISFETCH", true)
+      return error;
+    }
+  },
   async GET_STARSHIPS_URL({
     commit
   }, data) {

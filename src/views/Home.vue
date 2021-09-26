@@ -1,8 +1,14 @@
 <template>
   <div v-if="STARSHIPS !== null">
     <Input />
-    <Paginator />
-    <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
+    <div v-if="!STARSHIPS_SEARCH">
+      <Paginator />
+      <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
+    </div>
+    <div v-else>
+      <h2>Найдено короблей: {{ STARSHIPS_SEARCH.length }}</h2>
+    </div>
+
     <div v-if="ISFETCH">
       <Starship />
     </div>
@@ -30,7 +36,10 @@ export default {
     },
     ISFETCH() {
       return this.$store.getters.ISFETCH;
-    }
+    },
+    STARSHIPS_SEARCH() {
+      return this.$store.getters.STARSHIPS_SEARCH;
+    },
   },
   components: {
     Input,

@@ -3,10 +3,10 @@ export default {
     return state.starships;
   },
   STARSHIPS_SEARCH(state) {
-    return state.starshipsSearch
+    return state.starshipsSearch;
   },
   CURRENT_STARSHIP(state) {
-    return state.currentStarship
+    return state.currentStarship;
   },
   CURRENT_PAGE(state) {
     return state.currentPage;

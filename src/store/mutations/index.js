@@ -9,7 +9,7 @@ export default {
     state.currentPage = page;
   },
   SET_CURRENT_STARSHIP: (state, starship) => {
-    state.currentStarship = starship
+    state.currentStarship = starship;
   },
   SET_ISFETCH: (state, truth) => {
     state.isFetch = truth;
@@ -27,6 +27,6 @@ export default {
     state.currentPage = state.currentPage - 1;
   },
   CHANGE_POPUP_SHOW: (state, truth) => {
-    state.isPopupOpen = truth
+    state.isPopupOpen = truth;
   }
 }
