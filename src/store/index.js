@@ -15,9 +15,10 @@ const actions = {
 export default createStore({
   state: {
     starships: null,
+    starshipsSearch: null,
     currentPage: 1,
     currentStarship: null,
-    pageSize: 4,
+    pageSize: null,
     isFetch: false,
     isPopupOpen: true,
   },

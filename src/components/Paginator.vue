@@ -14,7 +14,7 @@
         class="paginator__list-li"
         v-for="n in PAGESIZE"
         :key="n"
-        v-bind:class="{ active: CURRENTPAGE === n }"
+        v-bind:class="{ active: CURRENT_PAGE === n }"
         @click="this.GET_STARSHIPS_NUMBER(n)"
       >
         {{ n }}
@@ -41,8 +41,8 @@ export default {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
     },
-    CURRENTPAGE() {
-      return this.$store.getters.CURRENTPAGE;
+    CURRENT_PAGE() {
+      return this.$store.getters.CURRENT_PAGE;
     },
     PAGESIZE() {
       return this.$store.getters.PAGESIZE;

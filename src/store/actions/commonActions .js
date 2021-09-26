@@ -29,4 +29,9 @@ export default {
   }, truth) {
     commit("CHANGE_POPUP_SHOW", truth)
   },
+  SET_PAGE_SIZE({
+    commit
+  }, size) {
+    commit("SET_PAGE_SIZE", size)
+  },
 }

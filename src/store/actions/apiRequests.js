@@ -9,6 +9,7 @@ export default {
       const response = await axios("https://swapi.dev/api/starships/?format=json", {
         method: "GET",
       });
+      commit("SET_PAGE_SIZE", Math.round(response.data.count / 10))
       commit("SET_STARSHIPS", response.data);
       commit("SET_ISFETCH", true)
       return response;

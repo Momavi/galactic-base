@@ -8,7 +8,7 @@ export default {
   CURRENT_STARSHIP(state) {
     return state.currentStarship
   },
-  CURRENTPAGE(state) {
+  CURRENT_PAGE(state) {
     return state.currentPage;
   },
   ISFETCH(state) {
@@ -16,5 +16,8 @@ export default {
   },
   PAGESIZE(state) {
     return state.pageSize;
-  }
+  },
+  IS_POPUP_OPEN(state) {
+    return state.isPopupOpen;
+  },
 }
