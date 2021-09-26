@@ -20,7 +20,6 @@ export default createStore({
     currentStarship: null,
     pageSize: null,
     isFetch: false,
-    isPopupOpen: true,
   },
   mutations,
   getters,

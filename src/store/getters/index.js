@@ -17,7 +17,4 @@ export default {
   PAGESIZE(state) {
     return state.pageSize;
   },
-  IS_POPUP_OPEN(state) {
-    return state.isPopupOpen;
-  },
 }
