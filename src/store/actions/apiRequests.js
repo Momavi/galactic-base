@@ -22,8 +22,8 @@ export default {
   async SET_STARSHIP_FOR_NAME({
     commit
   }, data) {
-    commit("SET_ISFETCH", false)
     if (data.name.length > 0) {
+      commit("SET_ISFETCH", false)
       const ship = []
       let response = {}
       const term = data.name.toLowerCase();
