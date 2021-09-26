@@ -6,7 +6,7 @@
       <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
     </div>
     <div v-else>
-      <h2>Найдено короблей: {{ STARSHIPS_SEARCH.length }}</h2>
+      <h2>Найдено кораблей: {{ STARSHIPS_SEARCH.length }}</h2>
     </div>
 
     <div v-if="ISFETCH">
