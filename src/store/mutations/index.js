@@ -21,9 +21,11 @@ export default {
     state.starshipsSearch = null;
   },
   INCREMENT_CURRENTPAGE: (state) => {
-    state.currentPage = state.currentPage + 1;
+    state.currentPage < state.pageSize ?
+      state.currentPage = state.currentPage + 1 : null
   },
   DECREMENT_CURRENTPAGE: (state) => {
-    state.currentPage = state.currentPage - 1;
+    state.currentPage > 1 ?
+      state.currentPage = state.currentPage - 1 : null
   },
 }
