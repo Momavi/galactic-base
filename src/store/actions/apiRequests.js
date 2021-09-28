@@ -1,18 +1,21 @@
 import axios from "axios";
 
+const instance = axios.create({
+  baseURL: 'https://swapi.dev/api/starships',
+});
+
 export default {
   async GET_STARSHIPS({
     commit
   }) {
     commit("SET_ISFETCH", false)
     try {
-      const response = await axios("https://swapi.dev/api/starships/?format=json", {
-        method: "GET",
-      });
-      commit("SET_PAGE_SIZE", Math.round(response.data.count / 10))
-      commit("SET_STARSHIPS", response.data);
-      commit("SET_ISFETCH", true)
-      return response;
+      return instance("/").then(response => {
+        commit("SET_PAGE_SIZE", Math.round(response.data.count / 10))
+        commit("SET_STARSHIPS", response.data);
+        commit("SET_ISFETCH", true)
+        return response;
+      })
     } catch (error) {
       console.log(error);
       commit("SET_ISFETCH", true)
@@ -25,24 +28,22 @@ export default {
     if (data.name.length > 0) {
       commit("SET_ISFETCH", false)
       const ship = []
-      let response = {}
       const term = data.name.toLowerCase();
       try {
         for (let i = 1; i < 5; i++) {
-          const response = await axios("https://swapi.dev/api/starships/?page=" + i + "&format=json", {
-            method: "GET",
-          });
-          if (response.status === 200) {
-            for (var key in response.data.results) {
-              response.data.results[key].name.toLowerCase().startsWith(term) ?
-                ship.push(response.data.results[key]) :
-                null
+          return instance("/?page=" + i).then(response => {
+            if (response.status === 200) {
+              for (var key in response.data.results) {
+                response.data.results[key].name.toLowerCase().startsWith(term) ?
+                  ship.push(response.data.results[key]) :
+                  null
+              }
             }
-          }
+            commit("SET_ISFETCH", true)
+            commit("SET_STARSHIPS_RESULTS", ship)
+            return response;
+          })
         }
-        commit("SET_ISFETCH", true)
-        commit("SET_STARSHIPS_RESULTS", ship)
-        return response;
       } catch (error) {
         console.log(error);
         commit("SET_ISFETCH", true)
@@ -58,13 +59,12 @@ export default {
       commit("INCREMENT_CURRENTPAGE") :
       commit("DECREMENT_CURRENTPAGE")
     try {
-      const response = await axios(data.link, {
-        method: "GET",
-      });
-      commit("SET_STARSHIPS", response.data);
-      commit("CLEAR_STARSHIPS_SEARCH")
-      commit("SET_ISFETCH", true)
-      return response;
+      return instance(data.link).then(response => {
+        commit("SET_STARSHIPS", response.data);
+        commit("CLEAR_STARSHIPS_SEARCH")
+        commit("SET_ISFETCH", true)
+        return response;
+      })
     } catch (error) {
       console.log(error);
       commit("SET_ISFETCH", true)
@@ -76,14 +76,13 @@ export default {
   }, currentPage) {
     commit("SET_ISFETCH", false)
     try {
-      const response = await axios("https://swapi.dev/api/starships/?page=" + currentPage + "&format=json", {
-        method: "GET",
-      });
-      commit("SET_STARSHIPS", response.data);
-      commit("SET_CURRENTPAGE", currentPage);
-      commit("CLEAR_STARSHIPS_SEARCH")
-      commit("SET_ISFETCH", true)
-      return response;
+      return instance("/?page=" + currentPage).then(response => {
+        commit("SET_STARSHIPS", response.data);
+        commit("SET_CURRENTPAGE", currentPage);
+        commit("CLEAR_STARSHIPS_SEARCH")
+        commit("SET_ISFETCH", true)
+        return response;
+      })
     } catch (error) {
       console.log(error);
       commit("SET_ISFETCH", true)
