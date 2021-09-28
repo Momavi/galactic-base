@@ -6,7 +6,7 @@
       type="text"
       placeholder="Название корабля"
       v-on:keyup.enter="
-        this.SET_STARSHIP_FOR_NAME({
+        this.SET_STARSHIP_SEARCH({
           STARSHIPS: STARSHIPS,
           name: searchText,
         })
@@ -16,7 +16,7 @@
       <button
         class="input__button-btn"
         @click="
-          this.SET_STARSHIP_FOR_NAME({
+          this.SET_STARSHIP_SEARCH({
             STARSHIPS: STARSHIPS,
             name: searchText,
           })
@@ -28,7 +28,7 @@
         class="input__reset input__button-btn"
         v-bind:class="{ active: STARSHIPS_SEARCH }"
         @click="
-          this.CLEAR_STARSHIPS_SEARCH({
+          this.SET_STARSHIP_SEARCH({
             STARSHIPS: STARSHIPS,
             name: searchText,
           })
@@ -59,7 +59,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["SET_STARSHIP_FOR_NAME"]),
+    ...mapActions(["SET_STARSHIP_SEARCH"]),
     ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
   },
 };

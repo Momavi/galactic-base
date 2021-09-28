@@ -22,7 +22,7 @@ export default {
       return error;
     }
   },
-  async SET_STARSHIP_FOR_NAME({
+  async SET_STARSHIP_SEARCH({
     commit
   }, data) {
     if (data.name.length > 0) {
