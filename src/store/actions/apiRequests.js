@@ -28,14 +28,14 @@ export default {
   }, data) {
     if (data.name.length > 0) {
       commit("SET_ISFETCH", false)
-      const ship = []
+      let ship = []
       const term = data.name.toLowerCase();
       try {
         for (let i = 1; i < 5; i++) {
           return instance("/?page=" + i).then(response => {
             if (response.status === 200) {
               for (var key in response.data.results) {
-                response.data.results[key].name.toLowerCase().startsWith(term) ?
+                response.data.results[key].name.toLowerCase().indexOf(term) !== -1 ?
                   ship.push(response.data.results[key]) :
                   null
               }
