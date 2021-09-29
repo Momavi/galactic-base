@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../../router";
 
 const instance = axios.create({
   baseURL: 'https://swapi.dev/api/starships',
@@ -39,6 +40,12 @@ export default {
                   null
               }
             }
+            router.push({
+              path: '/',
+              query: {
+                argument: term
+              }
+            })
             commit("SET_ISFETCH", true)
             commit("SET_STARSHIPS_RESULTS", ship)
             return response;
