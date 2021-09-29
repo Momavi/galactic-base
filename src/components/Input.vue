@@ -28,7 +28,7 @@
         class="input__reset input__button-btn"
         v-bind:class="{ active: STARSHIPS_SEARCH }"
         @click="
-          this.SET_STARSHIP_SEARCH({
+          this.CLEAR_STARSHIPS_SEARCH({
             STARSHIPS: STARSHIPS,
             name: searchText,
           })
