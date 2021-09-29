@@ -12,7 +12,6 @@ export default {
     commit("SET_ISFETCH", false)
     try {
       return instance("/").then(response => {
-        commit("SET_PAGE_SIZE", Math.round(response.data.count / 10))
         commit("SET_STARSHIPS", response.data);
         commit("SET_ISFETCH", true)
         return response;
@@ -62,9 +61,6 @@ export default {
     commit
   }, data) {
     commit("SET_ISFETCH", false)
-    data.atribute === "next" ?
-      commit("INCREMENT_CURRENTPAGE") :
-      commit("DECREMENT_CURRENTPAGE")
     try {
       return instance(data.link).then(response => {
         commit("SET_STARSHIPS", response.data);
@@ -85,7 +81,6 @@ export default {
     try {
       return instance("/?page=" + currentPage).then(response => {
         commit("SET_STARSHIPS", response.data);
-        commit("SET_CURRENTPAGE", currentPage);
         commit("CLEAR_STARSHIPS_SEARCH")
         commit("SET_ISFETCH", true)
         return response;

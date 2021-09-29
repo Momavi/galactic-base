@@ -16,9 +16,7 @@ export default createStore({
   state: {
     starships: null,
     starshipsSearch: null,
-    currentPage: 1,
     currentStarship: null,
-    pageSize: null,
     isFetch: false,
   },
   mutations,

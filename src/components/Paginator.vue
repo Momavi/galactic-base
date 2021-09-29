@@ -1,34 +1,40 @@
 <template>
   <div class="paginator">
     <div
+      v-if="ISFETCH && currentPage !== 1"
       class="paginator__btn-prev paginator__btn"
       v-bind:class="{ active: STARSHIPS.previous }"
       @click="
-        this.GET_STARSHIPS_URL({ link: STARSHIPS.previous, atribute: 'prev' })
+        prevPage();
+        this.GET_STARSHIPS_URL({ link: STARSHIPS.previous });
       "
     >
       Пред
     </div>
+    <div v-else class="paginator__btn-prev paginator__btn">Пред</div>
     <ul class="paginator__list">
       <li
         class="paginator__list-li"
-        v-for="n in PAGESIZE"
+        v-for="n in PAGE_SIZE"
         :key="n"
-        v-bind:class="{ active: CURRENT_PAGE === n }"
+        v-bind:class="{ active: currentPage === n }"
         @click="this.GET_STARSHIPS_NUMBER(n)"
       >
         {{ n }}
       </li>
     </ul>
     <div
+      v-if="ISFETCH && currentPage !== PAGE_SIZE"
       class="paginator__btn-next paginator__btn"
       v-bind:class="{ active: STARSHIPS.next }"
       @click="
-        this.GET_STARSHIPS_URL({ link: STARSHIPS.next, atribute: 'next' })
+        nextPage();
+        this.GET_STARSHIPS_URL({ link: STARSHIPS.next });
       "
     >
       След
     </div>
+    <div v-else class="paginator__btn-next paginator__btn">След</div>
   </div>
 </template>
 
@@ -37,20 +43,33 @@ import { mapActions } from "vuex";
 
 export default {
   name: "Paginator",
+  data: function() {
+    return {
+      currentPage: 1,
+    };
+  },
   computed: {
     STARSHIPS() {
       return this.$store.getters.STARSHIPS;
     },
-    CURRENT_PAGE() {
-      return this.$store.getters.CURRENT_PAGE;
+    ISFETCH() {
+      return this.$store.getters.ISFETCH;
     },
-    PAGESIZE() {
-      return this.$store.getters.PAGESIZE;
+    PAGE_SIZE() {
+      return Math.round(this.$store.getters.STARSHIPS.count / 10);
     },
   },
   methods: {
     ...mapActions(["GET_STARSHIPS_URL"]),
     ...mapActions(["GET_STARSHIPS_NUMBER"]),
+    nextPage() {
+      this.currentPage < Math.round(this.$store.getters.STARSHIPS.count / 10)
+        ? this.currentPage++
+        : null;
+    },
+    prevPage() {
+      this.currentPage > 1 ? this.currentPage-- : null;
+    },
   },
 };
 </script>
@@ -96,10 +115,10 @@ export default {
     user-select: none;
     transition: all 0.3s;
     &-prev {
-      margin-right: 30px;
+      margin-right: 25px;
     }
     &-next {
-      margin-left: 30px;
+      margin-left: 25px;
     }
     &.active {
       background-color: #42b98367;

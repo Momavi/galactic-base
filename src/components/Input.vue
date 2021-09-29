@@ -73,7 +73,7 @@ export default {
     }
   }
   &-box {
-    width: 20%;
+    width: 200px;
     height: 35px;
     padding-left: 15px;
     border: none;
