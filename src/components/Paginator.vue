@@ -18,7 +18,10 @@
         v-for="n in PAGE_SIZE"
         :key="n"
         v-bind:class="{ active: currentPage === n }"
-        @click="this.GET_STARSHIPS_NUMBER(n)"
+        @click="
+          setPage(n);
+          this.GET_STARSHIPS_NUMBER(n);
+        "
       >
         {{ n }}
       </li>
@@ -69,6 +72,9 @@ export default {
     },
     prevPage() {
       this.currentPage > 1 ? this.currentPage-- : null;
+    },
+    setPage(number) {
+      this.currentPage = number;
     },
   },
 };
