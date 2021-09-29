@@ -15,10 +15,7 @@
         <p>
           Цена:
           <strong>{{
-            CURRENT_STARSHIP.cost_in_credits.replace(
-              /(\d)(?=(\d{3})+(\D|$))/g,
-              "$1 "
-            )
+            REGULAR_SPACE_FOR_NUMBER(CURRENT_STARSHIP.cost_in_credits)
           }}</strong>
           кредитов
         </p>
@@ -39,10 +36,7 @@
         <p>
           Грузоподъемность:
           <strong>{{
-            CURRENT_STARSHIP.cargo_capacity.replace(
-              /(\d)(?=(\d{3})+(\D|$))/g,
-              "$1 "
-            )
+            REGULAR_SPACE_FOR_NUMBER(CURRENT_STARSHIP.cargo_capacity)
           }}</strong>
           кг
         </p>
@@ -94,6 +88,11 @@ export default {
   computed: {
     CURRENT_STARSHIP() {
       return this.$store.getters.CURRENT_STARSHIP;
+    },
+  },
+  methods: {
+    REGULAR_SPACE_FOR_NUMBER(number) {
+      return number.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ");
     },
   },
 };

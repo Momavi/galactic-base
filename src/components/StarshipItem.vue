@@ -1,13 +1,18 @@
 <template>
   <div v-for="starship in data" :key="starship.name">
-    <div class="starship" @click="this.CURRENT_STARSHIP(starship)">
+    <div
+      class="starship"
+      @click="
+        this.CURRENT_STARSHIP({
+          starship,
+        })
+      "
+    >
       <div class="starship__data">
         <h3>{{ starship.name }}</h3>
         <p>
           Цена:
-          {{
-            starship.cost_in_credits.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ")
-          }}
+          {{ REGULAR_SPACE_FOR_NUMBER(starship.cost_in_credits) }}
           кредитов
         </p>
         <p>Класс: {{ starship.starship_class }}</p>
@@ -32,6 +37,9 @@ export default {
   props: ["data"],
   methods: {
     ...mapActions(["CURRENT_STARSHIP"]),
+    REGULAR_SPACE_FOR_NUMBER(number) {
+      return number.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ");
+    },
   },
 };
 </script>
