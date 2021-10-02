@@ -22,7 +22,7 @@
 
 <script>
 import Paginator from "@/components/Paginator.vue";
-import Starship from "@/components/Starship.vue";
+import Starships from "@/components/Starships.vue";
 import Input from "@/components/Input.vue";
 import { mapState } from "vuex";
 
@@ -34,7 +34,7 @@ export default {
   components: {
     Input,
     Paginator,
-    Starship,
+    Starships,
   },
 };
 </script>
