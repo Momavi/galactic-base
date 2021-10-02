@@ -5,22 +5,12 @@
       v-model="searchText"
       type="text"
       placeholder="Название корабля"
-      @keyup.enter="
-        this.SET_STARSHIP_SEARCH({
-          starships: starships,
-          name: searchText,
-        })
-      "
+      @keyup.enter="this.PUSH_SEARCH_ARGUMENT(searchText)"
     />
     <div class="input__button">
       <button
         class="input__button-btn"
-        @click="
-          this.SET_STARSHIP_SEARCH({
-            starships: starships,
-            name: searchText,
-          })
-        "
+        @click="this.PUSH_SEARCH_ARGUMENT(searchText)"
       >
         Поиск
       </button>
@@ -28,7 +18,7 @@
         class="input__reset input__button-btn"
         :class="{ active: starshipsSearch }"
         @click="
-          this.CLEAR_STARSHIPS_SEARCH({
+          this.CLEAR_INPUT_DATA({
             starships: starships,
             name: searchText,
           })
@@ -41,6 +31,7 @@
 </template>
 
 <script>
+import router from "../router";
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -56,6 +47,28 @@ export default {
   methods: {
     ...mapActions(["SET_STARSHIP_SEARCH"]),
     ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
+    CLEAR_INPUT_DATA() {
+      this.searchText = "";
+      this.CLEAR_STARSHIPS_SEARCH();
+    },
+    PUSH_SEARCH_ARGUMENT(argument) {
+      router.push({
+        path: "/",
+        query: {
+          argument: argument,
+        },
+      });
+    },
+  },
+  watch: {
+    $route(to, from) {
+      if (to.query.argument !== from.query.argument) {
+        this.SET_STARSHIP_SEARCH(this.searchText);
+      }
+      if (to.query.argument === "") {
+        this.CLEAR_STARSHIPS_SEARCH();
+      }
+    },
   },
 };
 </script>

@@ -1,5 +1,4 @@
 import axios from "axios";
-import router from "../../router";
 
 const instance = axios.create({
   baseURL: 'https://swapi.dev/api/starships',
@@ -25,16 +24,10 @@ export default {
   async SET_STARSHIP_SEARCH({
     commit
   }, data) {
-    if (data.name.length > 0) {
+    if (data.length > 0) {
       commit("SET_ISFETCH", false)
       try {
-        return instance("?search=" + data.name).then(response => {
-          router.push({
-            path: '/',
-            query: {
-              argument: data.name
-            }
-          })
+        return instance("?search=" + data).then(response => {
           commit("SET_ISFETCH", true)
           commit("SET_STARSHIPS_RESULTS", response.data.results)
           return response;
