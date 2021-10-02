@@ -4,15 +4,20 @@ export default {
   CURRENT_STARSHIP({
     commit
   }, data) {
-    commit("SET_CURRENT_STARSHIP", data.starship)
+    commit("SET_CURRENT_STARSHIP", data)
     const link_number = Number(data.url.match(/\d+/))
     router.push({
-      path: `/about/${link_number}`
+      path: '/about',
+      query: {
+        id: link_number
+      }
     })
   },
   CLEAR_STARSHIPS_SEARCH({
+    dispatch,
     commit
   }) {
+    dispatch("GET_STARSHIPS")
     commit("CLEAR_STARSHIPS_SEARCH")
     router.push({
       path: '/',
