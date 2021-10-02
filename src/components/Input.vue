@@ -61,8 +61,6 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to);
-      console.log(from);
       if (to.query.argument !== from.query.argument) {
         this.SET_STARSHIP_SEARCH(this.searchText);
       }
