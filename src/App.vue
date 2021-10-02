@@ -3,7 +3,7 @@
     <router-link @click="CLEAR_STARSHIPS_SEARCH()" class="nav__link" to="/"
       >Cписок кораблей</router-link
     >
-    <span v-if="CURRENT_STARSHIP">
+    <span v-if="currentStarship">
       |
       <router-link to="/about">Текущий корабль</router-link>
     </span>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "app",
@@ -21,8 +21,8 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["STARSHIPS"]),
-    ...mapGetters(["CURRENT_STARSHIP"]),
+    ...mapState(["starships"]),
+    ...mapState(["currentStarship"]),
   },
   methods: {
     ...mapActions(["GET_STARSHIPS"]),

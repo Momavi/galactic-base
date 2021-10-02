@@ -1,16 +1,15 @@
 <template>
-  <div v-if="STARSHIPS !== null">
+  <div v-if="starships !== null">
     <Input />
-    <div v-if="!STARSHIPS_SEARCH">
+    <div v-if="!starshipsSearch">
       <Paginator />
-      <h2>Количество кораблей: {{ STARSHIPS.count }}</h2>
+      <h2>Количество кораблей: {{ starships.count }}</h2>
     </div>
     <div v-else>
-      <h2>Найдено кораблей: {{ STARSHIPS_SEARCH.length }}</h2>
+      <h2>Найдено кораблей: {{ starshipsSearch.length }}</h2>
     </div>
-
-    <div v-if="ISFETCH">
-      <Starship />
+    <div v-if="isFetch">
+      <Starships />
     </div>
     <div v-else>
       <img src="@/assets/preloader.svg" alt="" />
@@ -21,30 +20,21 @@
   </div>
 </template>
 
-<script lang="js">
+<script>
 import Paginator from "@/components/Paginator.vue";
 import Starship from "@/components/Starship.vue";
 import Input from "@/components/Input.vue";
+import { mapState } from "vuex";
 
 export default {
-  name: 'Home',
+  name: "Home",
   computed: {
-    STARSHIPS() {
-      return this.$store.getters.STARSHIPS;
-    },
-    ISFETCH() {
-      return this.$store.getters.ISFETCH;
-    },
-    STARSHIPS_SEARCH() {
-      return this.$store.getters.STARSHIPS_SEARCH;
-    },
+    ...mapState(["starships", "isFetch", "starshipsSearch"]),
   },
   components: {
     Input,
     Paginator,
     Starship,
   },
-}
+};
 </script>
-
-<style scoped lang="scss"></style>

@@ -2,10 +2,10 @@ import {
   createStore
 } from "vuex";
 
-import mutations from "./mutations"
+import mutations from "./mutations";
 import getters from "./getters";
-import apiRequests from './actions/apiRequests'
-import commonActions from './actions/commonActions '
+import apiRequests from "./actions/apiRequests";
+import commonActions from "./actions/commonActions";
 
 const actions = {
   ...apiRequests,

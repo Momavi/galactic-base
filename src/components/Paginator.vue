@@ -1,12 +1,12 @@
 <template>
   <div class="paginator">
     <div
-      v-if="ISFETCH && currentPage !== 1"
+      v-if="isFetch && currentPage !== 1"
       class="paginator__btn-prev paginator__btn"
-      v-bind:class="{ active: STARSHIPS.previous }"
+      v-bind:class="{ active: starships.previous }"
       @click="
         prevPage();
-        this.GET_STARSHIPS_URL({ link: STARSHIPS.previous });
+        this.GET_STARSHIPS_URL({ link: starships.previous });
       "
     >
       Пред
@@ -15,9 +15,9 @@
     <ul class="paginator__list">
       <li
         class="paginator__list-li"
-        v-for="n in PAGE_SIZE"
+        v-for="n in STARSHIPS_PAGE_SIZE"
         :key="n"
-        v-bind:class="{ active: currentPage === n }"
+        :class="{ active: currentPage === n }"
         @click="
           setPage(n);
           this.GET_STARSHIPS_NUMBER(n);
@@ -27,12 +27,12 @@
       </li>
     </ul>
     <div
-      v-if="ISFETCH && currentPage !== PAGE_SIZE"
+      v-if="isFetch && currentPage !== STARSHIPS_PAGE_SIZE"
       class="paginator__btn-next paginator__btn"
-      v-bind:class="{ active: STARSHIPS.next }"
+      :class="{ active: starships.next }"
       @click="
         nextPage();
-        this.GET_STARSHIPS_URL({ link: STARSHIPS.next });
+        this.GET_STARSHIPS_URL({ link: starships.next });
       "
     >
       След
@@ -42,8 +42,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   name: "Paginator",
   data: function() {
@@ -52,23 +51,17 @@ export default {
     };
   },
   computed: {
-    STARSHIPS() {
-      return this.$store.getters.STARSHIPS;
-    },
-    ISFETCH() {
-      return this.$store.getters.ISFETCH;
-    },
-    PAGE_SIZE() {
-      return Math.round(this.$store.getters.STARSHIPS.count / 10);
-    },
+    ...mapState(["starships", "isFetch"]),
+    ...mapGetters(["STARSHIPS_PAGE_SIZE", "PAGINATOR_PAGE"]),
   },
   methods: {
     ...mapActions(["GET_STARSHIPS_URL"]),
     ...mapActions(["GET_STARSHIPS_NUMBER"]),
     nextPage() {
-      this.currentPage < Math.round(this.$store.getters.STARSHIPS.count / 10)
-        ? this.currentPage++
-        : null;
+      this.currentPage <
+      Math.round(this.$store.getters.STARSHIPS_PAGE_SIZE / 10)
+        ? null
+        : this.currentPage++;
     },
     prevPage() {
       this.currentPage > 1 ? this.currentPage-- : null;

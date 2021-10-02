@@ -5,9 +5,9 @@
       v-model="searchText"
       type="text"
       placeholder="Название корабля"
-      v-on:keyup.enter="
+      @keyup.enter="
         this.SET_STARSHIP_SEARCH({
-          STARSHIPS: STARSHIPS,
+          starships: starships,
           name: searchText,
         })
       "
@@ -17,7 +17,7 @@
         class="input__button-btn"
         @click="
           this.SET_STARSHIP_SEARCH({
-            STARSHIPS: STARSHIPS,
+            starships: starships,
             name: searchText,
           })
         "
@@ -26,10 +26,10 @@
       </button>
       <button
         class="input__reset input__button-btn"
-        v-bind:class="{ active: STARSHIPS_SEARCH }"
+        :class="{ active: starshipsSearch }"
         @click="
           this.CLEAR_STARSHIPS_SEARCH({
-            STARSHIPS: STARSHIPS,
+            starships: starships,
             name: searchText,
           })
         "
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "Input",
@@ -51,12 +51,7 @@ export default {
     };
   },
   computed: {
-    STARSHIPS() {
-      return this.$store.getters.STARSHIPS;
-    },
-    STARSHIPS_SEARCH() {
-      return this.$store.getters.STARSHIPS_SEARCH;
-    },
+    ...mapState(["starships", "starshipsSearch"]),
   },
   methods: {
     ...mapActions(["SET_STARSHIP_SEARCH"]),

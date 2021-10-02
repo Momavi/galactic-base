@@ -1,16 +1,16 @@
 <template>
-  <div class="about">
-    <div v-if="CURRENT_STARSHIP">
-      <h1>{{ CURRENT_STARSHIP.name }}</h1>
+  <div v-if="currentStarship" class="about">
+    <div>
+      <h1>{{ currentStarship.name }}</h1>
       <div class="about__wrapper">
         <p>
-          Модель: <strong>{{ CURRENT_STARSHIP.model }}</strong>
+          Модель: <strong>{{ currentStarship.model }}</strong>
         </p>
         <p>
-          Класс корабля: <strong>{{ CURRENT_STARSHIP.starship_class }}</strong>
+          Класс корабля: <strong>{{ currentStarship.starship_class }}</strong>
         </p>
         <p>
-          Производитель: <strong>{{ CURRENT_STARSHIP.manufacturer }}</strong>
+          Производитель: <strong>{{ currentStarship.manufacturer }}</strong>
         </p>
         <p>
           Цена:
@@ -20,80 +20,78 @@
           кредитов
         </p>
         <p>
-          Длина: <strong>{{ CURRENT_STARSHIP.length }}</strong> км
+          Длина: <strong>{{ currentStarship.length }}</strong> км
         </p>
         <p>
           Максимальная атмосферная скорость:
-          <strong>{{ CURRENT_STARSHIP.max_atmosphering_speed }}</strong>
+          <strong>{{ currentStarship.max_atmosphering_speed }}</strong>
           КМ/Ч
         </p>
         <p>
-          Экипаж: <strong>{{ CURRENT_STARSHIP.crew }}</strong> человек
+          Экипаж: <strong>{{ currentStarship.crew }}</strong> человек
         </p>
         <p>
-          Пассажиры: <strong>{{ CURRENT_STARSHIP.passengers }}</strong> человек
+          Пассажиры: <strong>{{ currentStarship.passengers }}</strong> человек
         </p>
         <p>
           Грузоподъемность:
-          <strong>{{
-            REGULAR_SPACE_FOR_NUMBER(CURRENT_STARSHIP.cargo_capacity)
-          }}</strong>
+          <strong>
+            <regular-space-for-number
+              :number="currentStarship.cargo_capacity"
+            />
+          </strong>
           кг
         </p>
         <p>
-          Гарантия: <strong>{{ CURRENT_STARSHIP.consumables }}</strong>
+          Гарантия: <strong>{{ currentStarship.consumables }}</strong>
         </p>
         <p>
           Скорость гипердвигателя:
-          <strong>{{ CURRENT_STARSHIP.hyperdrive_rating }}</strong>
+          <strong>{{ currentStarship.hyperdrive_rating }}</strong>
         </p>
         <p>
           MGLT:
-          <strong>{{ CURRENT_STARSHIP.MGLT }}</strong>
+          <strong>{{ currentStarship.MGLT }}</strong>
         </p>
-        <span v-if="CURRENT_STARSHIP.pilots.length > 0">
+        <span v-if="currentStarship.pilots.length > 0">
           Пилоты:
-          <p v-for="pilot in CURRENT_STARSHIP.pilots" :key="pilot">
+          <p v-for="pilot in currentStarship.pilots" :key="pilot">
             {{ pilot }},
           </p>
         </span>
         <span v-else>
           Пилоты: неизвестны
         </span>
-        <span v-if="CURRENT_STARSHIP.films">
+        <span v-if="currentStarship.films">
           Фильмы:
-          <p v-for="film in CURRENT_STARSHIP.films" :key="film">{{ film }},</p>
+          <p v-for="film in currentStarship.films" :key="film">{{ film }},</p>
         </span>
         <p>
           Дата создания:
-          <strong>{{ CURRENT_STARSHIP.created }}</strong>
+          <strong>{{ currentStarship.created }}</strong>
         </p>
         <p>
           Дата изменения:
-          <strong>{{ CURRENT_STARSHIP.edited }}</strong>
+          <strong>{{ currentStarship.edited }}</strong>
         </p>
         <p>
           Ссылка на источник:
-          <a v-bind:href="CURRENT_STARSHIP.url">{{ CURRENT_STARSHIP.url }}</a>
+          <a :href="currentStarship.url">{{ currentStarship.url }}</a>
         </p>
       </div>
     </div>
-    <div v-else>Тут ничего нет, перейдите на главную страницу</div>
   </div>
+  <div v-else>Тут ничего нет, попробуйте перейти на главную страницу</div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "About",
+  components: { RegularSpaceForNumber },
   computed: {
-    CURRENT_STARSHIP() {
-      return this.$store.getters.CURRENT_STARSHIP;
-    },
-  },
-  methods: {
-    REGULAR_SPACE_FOR_NUMBER(number) {
-      return number.replace(/(\d)(?=(\d{3})+(\D|$))/g, "$1 ");
-    },
+    ...mapState(["currentStarship"]),
   },
 };
 </script>
