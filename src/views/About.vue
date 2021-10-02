@@ -14,9 +14,11 @@
         </p>
         <p>
           Цена:
-          <strong>{{
-            REGULAR_SPACE_FOR_NUMBER(CURRENT_STARSHIP.cost_in_credits)
-          }}</strong>
+          <strong>
+            <regular-space-for-number
+              :number="currentStarship.cost_in_credits"
+            />
+          </strong>
           кредитов
         </p>
         <p>
@@ -85,6 +87,7 @@
 </template>
 
 <script>
+import RegularSpaceForNumber from "../components/RegularSpaceForNumber.vue";
 import { mapState } from "vuex";
 
 export default {
