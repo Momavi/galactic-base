@@ -13,13 +13,10 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import router from "./router";
 
 export default {
   name: "app",
-  components: {},
-  data: () => {
-    return {};
-  },
   computed: {
     ...mapState(["starships"]),
     ...mapState(["currentStarship"]),
@@ -30,6 +27,15 @@ export default {
   },
   mounted() {
     this.GET_STARSHIPS();
+  },
+  watch: {
+    $route() {
+      if (this.$route.path !== "/" && this.currentStarship === null) {
+        router.push({
+          path: "/",
+        });
+      }
+    },
   },
 };
 </script>
