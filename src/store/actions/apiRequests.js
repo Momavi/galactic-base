@@ -27,29 +27,18 @@ export default {
   }, data) {
     if (data.name.length > 0) {
       commit("SET_ISFETCH", false)
-      let ship = []
-      const term = data.name.toLowerCase();
       try {
-        for (let i = 1; i < 5; i++) {
-          return instance("/?page=" + i).then(response => {
-            if (response.status === 200) {
-              for (var key in response.data.results) {
-                response.data.results[key].name.toLowerCase().indexOf(term) !== -1 ?
-                  ship.push(response.data.results[key]) :
-                  null
-              }
+        return instance("?search=" + data.name).then(response => {
+          router.push({
+            path: '/',
+            query: {
+              argument: data.name
             }
-            router.push({
-              path: '/',
-              query: {
-                argument: term
-              }
-            })
-            commit("SET_ISFETCH", true)
-            commit("SET_STARSHIPS_RESULTS", ship)
-            return response;
           })
-        }
+          commit("SET_ISFETCH", true)
+          commit("SET_STARSHIPS_RESULTS", response.data.results)
+          return response;
+        })
       } catch (error) {
         console.log(error);
         commit("SET_ISFETCH", true)
