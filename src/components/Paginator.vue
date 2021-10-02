@@ -55,8 +55,7 @@ export default {
     ...mapGetters(["STARSHIPS_PAGE_SIZE", "PAGINATOR_PAGE"]),
   },
   methods: {
-    ...mapActions(["GET_STARSHIPS_URL"]),
-    ...mapActions(["GET_STARSHIPS_NUMBER"]),
+    ...mapActions(["GET_STARSHIPS_URL", "GET_STARSHIPS_NUMBER"]),
     nextPage() {
       this.currentPage <
       Math.round(this.$store.getters.STARSHIPS_PAGE_SIZE / 10)

@@ -18,22 +18,32 @@ import router from "./router";
 export default {
   name: "app",
   computed: {
-    ...mapState(["starships"]),
-    ...mapState(["currentStarship"]),
+    ...mapState(["starships", "currentStarship"]),
   },
   methods: {
-    ...mapActions(["GET_STARSHIPS"]),
-    ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
+    ...mapActions([
+      "GET_STARSHIPS",
+      "SET_STARSHIP_SEARCH",
+      "CLEAR_STARSHIPS_SEARCH",
+    ]),
   },
   mounted() {
     this.GET_STARSHIPS();
   },
   watch: {
-    $route() {
+    $route(to, from) {
       if (this.$route.path !== "/" && this.currentStarship === null) {
         router.push({
           path: "/",
         });
+      }
+      if (this.$router.currentRoute.value.query.argument === "") {
+        this.CLEAR_STARSHIPS_SEARCH();
+      }
+      if (to.query.argument !== from.query.argument) {
+        this.SET_STARSHIP_SEARCH(
+          this.$router.currentRoute.value.query.argument
+        );
       }
     },
   },

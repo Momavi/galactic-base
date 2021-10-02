@@ -45,8 +45,7 @@ export default {
     ...mapState(["starships", "starshipsSearch"]),
   },
   methods: {
-    ...mapActions(["SET_STARSHIP_SEARCH"]),
-    ...mapActions(["CLEAR_STARSHIPS_SEARCH"]),
+    ...mapActions(["SET_STARSHIP_SEARCH", "CLEAR_STARSHIPS_SEARCH"]),
     CLEAR_INPUT_DATA() {
       this.searchText = "";
       this.CLEAR_STARSHIPS_SEARCH();
@@ -62,11 +61,10 @@ export default {
   },
   watch: {
     $route(to, from) {
+      console.log(to);
+      console.log(from);
       if (to.query.argument !== from.query.argument) {
         this.SET_STARSHIP_SEARCH(this.searchText);
-      }
-      if (to.query.argument === "") {
-        this.CLEAR_STARSHIPS_SEARCH();
       }
     },
   },
